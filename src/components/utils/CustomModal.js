@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import OutsideClick from '../../handlers/OutsideClick'
 
 const CustomModal = ({open , setOpen , children , maxWidth}) => {
+    // open , setOpen => to handle showing and hiding the modal
 
     const handleClose = ()=>{
         setOpen(false)

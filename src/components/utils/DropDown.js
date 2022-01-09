@@ -2,12 +2,18 @@ import React,{useState , useRef} from 'react'
 import OutsideClick from '../../handlers/OutsideClick'
 
 const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => {
+    // title : displayed label on the top right corner of select
+    // list : incomiing list of options to show on drop down
+    // name : the name of select to target the desired key of state on parent element
+    // listMapProp : we got a list of objects on dropdown , this will hanlde wich key of that object should be displayed as LI
 
     const [open , setOpen] = useState(false)
     
     const DropRef = useRef(null)
+    // handling click out side of select component , dropdown would be closed
     OutsideClick(DropRef , ()=>setOpen(false))
 
+    // selecting the element on dropdown , changing the state of parent with OnChange , closing the dropdown 
     const HandleSelect = (e , selected)=>{
         e.stopPropagation()
         OnChange(name , selected)

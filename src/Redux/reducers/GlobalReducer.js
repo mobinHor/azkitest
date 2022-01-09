@@ -1,5 +1,6 @@
 import * as t from '../Types'
 
+// initial state of this reducer
 const GlobalState = {
     userInfo : undefined,
     carForm : undefined,

@@ -4,6 +4,7 @@ import userIcon from '../../assets/icons/user.svg'
 import { TranslateUserName } from '../../handlers/Translators'
 
 const Navbar = ({userInfo}) => {
+// this component is user in layout as navbar of pages
 
     return (
         <nav id="Navbar">

@@ -11,6 +11,7 @@ const bindMiddleware = (middleware) => {
     return applyMiddleware(...middleware)
 }
 
+// creating store with RootReducer and middlewares
 const Store = createStore(
     RootReducer , 
     bindMiddleware([thunkMiddleware])

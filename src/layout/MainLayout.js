@@ -11,8 +11,10 @@ const MainLayout = ({userInfo , AuthUser}) => {
 
     const Navigate = useNavigate()
 
+    // state to handle whole page loading
     const [load , setLoad] = useState(true)
 
+    // on app render , checks wether the user is authorized or not, if not , the user would be redirected to REGISTRATION page
     useEffect(() => {
         setTimeout(() => {
             let res = AuthUser()
@@ -48,6 +50,7 @@ const MainLayout = ({userInfo , AuthUser}) => {
 const carStyle = {
     position : 'relative',
     left : '5vw',
+    top : '0',
     maxWidth:'45vw',
 }
 
@@ -62,7 +65,6 @@ const yellowBox = {
 }
 const MobileYellowBox = {
     position : 'relative',
-    bottom : '0',
     zIndex : -1,
     left : 0,
     minHeight : '20vh',

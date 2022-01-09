@@ -25,9 +25,12 @@ ul {
   list-style: none;
 }
 
+html {
+  overflow-x: hidden !important;
+}
+
 body {
   direction: rtl;
-  overflow-x: hidden;
   font-family: 'IRANYekanRegularFaNum' , Arial, Helvetica, sans-serif;
 }
 
@@ -235,6 +238,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 0.5rem;
 }
 
 .modalWrapper .modalStyle {

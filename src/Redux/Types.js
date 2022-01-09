@@ -1,4 +1,4 @@
-
+// types used in dispatching actions to send state to reducers and change the store
 
 export const STORE_USER_INFO = 'STORE_USER_INFO'
 export const STORE_CAR_FORM = 'STORE_CAR_FORM'

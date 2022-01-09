@@ -1,14 +1,8 @@
 
 
-
+// validateing mobile input on forms with regular expression
 export const ValidateMobile = (mobile)=>{
     try {
-        if(mobile[0]==='0' && mobile.length!==11){
-            return false
-        }
-        if(mobile[9]==='0' && mobile[8]==='8'  && mobile.length!==12){
-            return false
-        }
         let regex = /(0|\+98)?([ ]|,|-|[()]){0,2}9[1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}/
         if(mobile.match(regex)){
             return true
@@ -20,6 +14,7 @@ export const ValidateMobile = (mobile)=>{
     }
 }
 
+// validating password input on form , at least 4 chars , at most 10 chars , at least 1 digit , at least 1 Uppercase char , at least 1 Lowercase char
 export const ValidatePasswordStrength = (pass)=>{
     try {
         if(pass.length < 4 || pass.length>10){
@@ -36,6 +31,7 @@ export const ValidatePasswordStrength = (pass)=>{
     }
 }
 
+// validate input to accept only number
 export const ValidateNumberOnly = (num)=>{
     try {
         if(num===''){
@@ -52,6 +48,7 @@ export const ValidateNumberOnly = (num)=>{
     }
 }
 
+// validate input to accept only persian characters
 export const ValidatePersianOnly = (txt)=>{
     try {
         if(txt===''){

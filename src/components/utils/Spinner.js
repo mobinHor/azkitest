@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Spinner = ({size="sm" , color="light" , fullWidth}) => {
+    // fullWidth : when true , the spinner would span accross the parent with larger height and centralized
     return (
         <div>
             {fullWidth ?
