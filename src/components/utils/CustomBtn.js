@@ -12,7 +12,7 @@ const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load , disa
     return (
         <button 
             title={disabled ? disableText : ''}
-            style={{maxWidth:maxWidth}} 
+            style={{maxWidth:maxWidth , opacity : disabled ? '0.6' : 1}} 
             className={classes + ' btn w-100'}
             onClick={handleClick} 
             disabled={disabled}>

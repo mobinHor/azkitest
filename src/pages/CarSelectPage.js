@@ -88,6 +88,8 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
                             maxWidth={150} 
                             classes="radius-rounded border-green p-2 text-green" 
                             OnClick={HandleSubmitForm} 
+                            disableText={"لطفا موارد بالا را انتخاب کنید"}
+                            disabled={carForm.model==='' || carForm.kind===''}
                             text={
                                 <div className='d-flex gap-1 justify-content-center align-items-center'>
                                     <p className='my-auto'>مرحله بعد</p>

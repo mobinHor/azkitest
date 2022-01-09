@@ -59,12 +59,24 @@ body {
   border-radius: 200px;
 }
 
+.radius-smooth {
+  border-radius: 10px;
+}
+
 .border-green {
   border: 1px solid var(--green);
 }
 
-#MainLayout {
-  height: 100vh;
+.centeralize {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .CustomInputWrapper label {
@@ -194,5 +206,38 @@ body {
 .DropDownWrapper .showList {
   opacity: 1;
   visibility: visible;
+}
+
+.backDrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+.modalWrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modalWrapper .modalStyle {
+  width: 100vw;
 }
 /*# sourceMappingURL=App.css.map */

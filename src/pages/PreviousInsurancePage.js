@@ -66,6 +66,8 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
                             maxWidth={150} 
                             classes="radius-rounded border-green p-2 text-green" 
                             OnClick={HandleSubmitForm} 
+                            disableText={"لطفا مورد بالا را انتخاب کنید"}
+                            disabled={comp===''}
                             text={
                                 <div className='d-flex gap-1 justify-content-center align-items-center'>
                                     <p className='my-auto'>مرحله بعد</p>

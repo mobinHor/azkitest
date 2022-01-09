@@ -5,13 +5,24 @@ import DropDown from '../components/utils/DropDown'
 import { GetDriverDiscounts , GetThirdDiscounts } from '../Redux/actions/GlobalActions'
 import {connect} from 'react-redux'
 import { StoreDiscountForm } from '../Redux/actions/GlobalActions'
+import CustomModal from '../components/utils/CustomModal'
 
-const DiscountPage = ({StoreDiscountForm , storedDiscountForm}) => {
+
+const ModalTableElement = ({title , value})=>(
+    <div className='d-flex align-items-center justify-content-between'>
+        <p className='my-auto font-weight-bold text-grey'>{title}</p>
+        <p className='my-auto'>{value}</p>
+    </div>
+)
+
+const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo , storedCompForm , storedCarForm}) => {
 
     const Navigate = useNavigate()
 
     const [thirdDiscounts , setThirdDiscounts] = useState([])
     const [driverDiscounts , setDriverDiscounts] = useState([])
+
+    const [openModal , setOpenModal] = useState(false)
 
     useEffect(() => {
         (async()=>{
@@ -46,6 +57,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm}) => {
     const HandleSubmitForm = (e)=>{
         e.preventDefault()
         StoreDiscountForm(discountForm)
+        setOpenModal(true)
     }
 
 
@@ -59,18 +71,43 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm}) => {
                     <DropDown name="driver" OnChange={OnChange} list={driverDiscounts} listMapProp="title" value={discountForm.driver} title="درصد تخفیف حودث راننده"/>
                     <CustomBtn 
                         maxWidth={180} 
+                        disableText={"لطفا موارد بالا را انتخاب کنید"}
+                        disabled={discountForm.third==='' || discountForm.driver===''}
                         classes="radius-rounded border-green p-2 bg-green text-white" 
-                        OnClick={()=>Navigate('/previous_insurance')} 
+                        OnClick={HandleSubmitForm} 
                         text="استعلام قیمت"
                     />
                 </form>
             </div>
+            <CustomModal maxWidth={500} open={openModal} setOpen={setOpenModal}>
+                <div className='bg-white radius-smooth p-4 d-flex flex-column gap-1'>
+                    <ModalTableElement title="نام و نام خانوادگی" value={`${storedUserInfo?.name} ${storedUserInfo?.lname}`}/>
+                    <ModalTableElement title="شماره موبایل" value={`${storedUserInfo?.mobile}`}/>
+                    <ModalTableElement title="وسیله نقلیه" value={`${storedCarForm?.kind.title} - ${storedCarForm?.model.title}`}/>
+                    <ModalTableElement title="شرکت بیمه‌گر قبلی" value={`${storedCompForm?.title}`}/>
+                    <ModalTableElement title="درصد تخفیف ثالث" value={`${storedDiscountForm?.third.title}`}/>
+                    <ModalTableElement title="درصد تخفیف حوادث راننده" value={`${storedDiscountForm?.driver.title}`}/>
+                    <div className='centeralize mt-4'>
+                        <CustomBtn 
+                            maxWidth={180} 
+                            disableText={"لطفا موارد بالا را انتخاب کنید"}
+                            disabled={discountForm.third==='' || discountForm.driver===''}
+                            classes="radius-rounded border-green p-2 bg-green text-white" 
+                            OnClick={()=>Navigate('/car_select')} 
+                            text="استعلام مجدد"
+                        />
+                    </div>
+                </div>
+            </CustomModal>
         </section>
     )
 }
 
 const mapStateToProps = state=>({
-    storedDiscountForm : state.Global.discountForm
+    storedDiscountForm : state.Global.discountForm,
+    storedCarForm : state.Global.carForm,
+    storedCompForm : state.Global.compForm,
+    storedUserInfo : state.Global.userInfo
 })
 
 export default connect(mapStateToProps , {StoreDiscountForm})(DiscountPage)

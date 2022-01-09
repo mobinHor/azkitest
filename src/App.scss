@@ -60,25 +60,24 @@ body{
 .radius-rounded{
     border-radius: 200px;
 }
+.radius-smooth{
+    border-radius: 10px;
+}
 
 .border-green{
     border: 1px solid var(--green);
+}
+
+.centeralize{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 
 
 // layout and pages
-
-#MainLayout{
-    height: 100vh;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
-}
-
-
-
 
 // components
 .CustomInputWrapper{
@@ -175,5 +174,31 @@ body{
     .showList{
         opacity: 1;
         visibility: visible;
+    }
+}
+
+.backDrop{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111;
+    z-index: 999;
+    opacity: 0.4;
+}
+
+.modalWrapper{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modalStyle{
+        width: 100vw;
     }
 }
