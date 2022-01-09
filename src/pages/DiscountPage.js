@@ -6,7 +6,7 @@ import { GetDriverDiscounts , GetThirdDiscounts } from '../Redux/actions/GlobalA
 import {connect} from 'react-redux'
 import { StoreDiscountForm } from '../Redux/actions/GlobalActions'
 import CustomModal from '../components/utils/CustomModal'
-
+import {TranslateUserName} from '../handlers/Translators'
 
 const ModalTableElement = ({title , value})=>(
     <div className='d-flex align-items-center justify-content-between'>
@@ -19,9 +19,13 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
 
     const Navigate = useNavigate()
 
+    // state to handle list of THIRD_DISCOUNTS comming from ENDPOINT
     const [thirdDiscounts , setThirdDiscounts] = useState([])
+
+    // state to handle list of DRIVER_DISCOUNTS comming from ENDPOINT
     const [driverDiscounts , setDriverDiscounts] = useState([])
 
+    // state to handle opening and closing the final modal
     const [openModal , setOpenModal] = useState(false)
 
     useEffect(() => {
@@ -37,10 +41,14 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
         })()
     }, [])
     
+    // local state to handle selected THIRD and DRIVER discount
     const [discountForm , setDiscountForm] = useState({
         third : '',
         driver : '',
     })
+    
+    // when the component is re-rendered and carForm persists in REDUX , set the data back into private state of this component
+    // in this page we do not have previous step , this process is used when user tries to navigate back with browser action
     useEffect(() => {
         if(storedDiscountForm){
             setDiscountForm(storedDiscountForm)
@@ -54,6 +62,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
         })
     }
 
+    // store carForm data to REDUX and open the final modal
     const HandleSubmitForm = (e)=>{
         e.preventDefault()
         StoreDiscountForm(discountForm)
@@ -81,7 +90,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
             </div>
             <CustomModal maxWidth={500} open={openModal} setOpen={setOpenModal}>
                 <div className='bg-white radius-smooth p-4 d-flex flex-column gap-1'>
-                    <ModalTableElement title="نام و نام خانوادگی" value={`${storedUserInfo?.name} ${storedUserInfo?.lname}`}/>
+                    <ModalTableElement title="نام و نام خانوادگی" value={`${TranslateUserName(storedUserInfo)}`}/>
                     <ModalTableElement title="شماره موبایل" value={`${storedUserInfo?.mobile}`}/>
                     <ModalTableElement title="وسیله نقلیه" value={`${storedCarForm?.kind.title} - ${storedCarForm?.model.title}`}/>
                     <ModalTableElement title="شرکت بیمه‌گر قبلی" value={`${storedCompForm?.title}`}/>

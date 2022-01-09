@@ -11,8 +11,10 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
 
     const Navigate = useNavigate()
 
+    // state to store carTypes comming from ENDPOINT locally
     const [carTypes , setCarTypes] = useState([])
 
+    // getting and setting data to local state
     useEffect(() => {
         (async ()=>{
             let res = await GetCarTypes()
@@ -22,27 +24,29 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
         })()
     }, [])
 
+    // state to handle chosen KIND and MODEL of vehicle
     const [carForm , setCarForm] = useState({
         kind : '',
         model : '',
     })
-    
+
+    // when the component is re-rendered and carForm persists in REDUX , set the data back into private state of this component
     useEffect(() => {
         if(storedCarForm){
             setCarForm(storedCarForm)
         }
     }, [storedCarForm])
-
     const OnChange = (name , value)=>{
         setCarForm({
             ...carForm,
             [name] : value,
+            // when user is selecting kind , the carModels list would be revoked, so the selected MODEL should not be valid and must be cleared
             [name==="kind" ? "model" : undefined] : ''
         })
     }
 
 
-    // generate the list of car models according to chosen car kind
+    // generate the list of carModels according to chosen car kind
     const getCarModels = ()=>{
         try {
             if(carForm.kind.id){
@@ -55,6 +59,7 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
         }
     }
 
+    // store carForm data to REDUX and proceed to next page
     const HandleSubmitForm = (e)=>{
         e.preventDefault()
         StoreCarForm(carForm)

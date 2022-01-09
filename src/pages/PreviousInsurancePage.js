@@ -11,6 +11,7 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
 
     const Navigate = useNavigate()
 
+    // local state to store COMPANIES list comming from ENDPOINT
     const [companies , setCompanies] = useState([])
 
     useEffect(() => {
@@ -21,6 +22,11 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
             }
         })()
     }, [])
+
+    // local state to handle selected company company
+    const [comp , setComp] = useState('')
+
+    // when the component is re-rendered and CompForm persists in REDUX , set the data back into private state of this component
     useEffect(() => {
         if(storedCompForm && comp===''){
             setComp(storedCompForm)
@@ -28,12 +34,13 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
         // eslint-disable-next-line
     }, [storedCompForm])
 
-    const [comp , setComp] = useState('')
+
 
     const OnChange = (name , value)=>{
         setComp(value)
     }
 
+    // store carForm data to REDUX and proceed to next page
     const HandleSubmitForm = (e)=>{
         e.preventDefault()
         StoreCompForm(comp)

@@ -10,16 +10,23 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
 
     const Navigate = useNavigate()
 
+    // state to handle fake loading during signup process
     const [load , setLoad] = useState(false)
 
+    // state to handle form errors => mobile and passowrd validation errors
+    // recieves SPOT and TEXT
+    // SPOT : defines where the error has occured
+    // TEXT : A message to clarify the error
     const [error , setError] = useState(null)
 
+    // when the component is re-rendered and userInfo persists in REDUX , set the data back into private state of this component
     useEffect(() => {
         if(StoredUserInfo){
             setRegisterForm(StoredUserInfo)
         }
     }, [StoredUserInfo])
 
+    // private state to handle registration form
     const [RegisterForm , setRegisterForm] = useState({
         name : '',
         lname : '',
@@ -28,6 +35,7 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
     })
 
     const OnChange = (name , value)=>{
+        // set the error object to null when user changes any input after occuring the error
         setError(null)
         setRegisterForm({
             ...RegisterForm,
@@ -46,6 +54,7 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
             return
         }
         setLoad(true)
+        // storing data in REDUX(to persist) and navigate user to next page
         setTimeout(() => {
             StoreUserInfo(RegisterForm)
             setLoad(false)
