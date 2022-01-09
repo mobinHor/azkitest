@@ -11,7 +11,7 @@ const MainLayout = ({userInfo , AuthUser}) => {
 
     const Navigate = useNavigate()
 
-    const [load , setLoad] = useState(false)
+    const [load , setLoad] = useState(true)
 
     useEffect(() => {
         setTimeout(() => {
