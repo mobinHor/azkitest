@@ -49,6 +49,7 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
     }
     // using useMemo to prevent re-rendering caused by state changes in the scope
     // useMemo is sensitive to carTypes (data comming from end-point)
+    // eslint-disable-next-line
     const carTypesList = useMemo(() => genCarTypes(), [carTypes]);
 
     // generate the list of car types according to data fetched from end-point
@@ -68,6 +69,7 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
     }
     // using useMemo to prevent re-rendering caused by state changes in the scope
     // useMemo is sensitive to carForm.kind (data comming from our state)
+    // eslint-disable-next-line
     const carModelsList = useMemo(() => getCarModels(), [carForm.kind]);
 
     const HandleSubmitForm = (e)=>{
@@ -79,7 +81,7 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
 
     return (
         <section id="CarSelect">
-            <div style={{maxWidth:'600px'}} className='mx-auto mt-4 p-4'>
+            <div style={{maxWidth:'600px'}} className='mx-auto mt-0 mt-md-4 p-4'>
                 <h4 className='text-center text-md-right font-weight-bold'>بیمه شخص ثالث</h4>
                 <p className='text-center text-md-right  text-grey mt-5'>نوع و مدل خودروی خود را انتخاب کنید.</p>
                 <form onSubmit={HandleSubmitForm} className='mt-5  d-flex align-items-end flex-column gap-1'>

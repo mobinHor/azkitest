@@ -51,7 +51,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm}) => {
 
     return (
         <section id="CarSelect">
-            <div style={{maxWidth:'600px'}} className='mx-auto mt-4 p-4'>
+            <div style={{maxWidth:'600px'}} className='mx-auto mt-0 mt-md-5 p-4'>
                 <h4 className='text-center text-md-right font-weight-bold'>بیمه شخص ثالث</h4>
                 <p className='text-center text-md-right  text-grey mt-5'>درصد تخفیف بیمه شخص ثالث و حوادث راننده را وارد کنید.</p>
                 <form onSubmit={HandleSubmitForm} className='mt-5  d-flex align-items-end flex-column gap-1'>

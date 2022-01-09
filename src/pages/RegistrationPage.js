@@ -37,7 +37,7 @@ const RegistrationPage = ({StoreUserInfo}) => {
 
     return (
         <section id="Registration">
-            <div style={{maxWidth:'600px'}} className='mx-auto mt-4 p-4'>
+            <div style={{maxWidth:'600px'}} className='mx-auto mt-0 mt-md-5 p-4'>
                 <h4 className='text-center text-md-right font-weight-bold'>ثبت نام</h4>
                 <form onSubmit={HandleSubmitForm} className='mt-5  d-flex align-items-end flex-column gap-1'>
                     <div className='d-flex flex-column flex-md-row w-100 gap-1'>

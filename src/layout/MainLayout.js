@@ -13,17 +13,18 @@ const MainLayout = ({userInfo , AuthUser}) => {
 
     const [load , setLoad] = useState(false)
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         let res = AuthUser()
-    //         if(res){
-    //             setLoad(false)
-    //         }else{
-    //             Navigate('/')
-    //             setLoad(false)
-    //         }
-    //     }, 1000);
-    // }, [])
+    useEffect(() => {
+        setTimeout(() => {
+            let res = AuthUser()
+            if(res){
+                setLoad(false)
+            }else{
+                Navigate('/')
+                setLoad(false)
+            }
+        }, 1000);
+        // eslint-disable-next-line
+    }, [])
 
     if(load) return <Spinner fullWidth size="lg" color="success"/>
 
@@ -35,7 +36,9 @@ const MainLayout = ({userInfo , AuthUser}) => {
                     <Outlet />
                 </div>
             </div>
-            <img style={carStyle} className='img-fluid' src={carSvg} alt=""/>
+            <div className='w-100 mt-4 mt-lg-0'>
+                <img style={carStyle} className='img-fluid' src={carSvg} alt=""/>
+            </div>
             <div style={yellowBox} className='bg-yellow d-none d-md-block'></div>
             <div style={MobileYellowBox} className='bg-yellow d-block d-md-none'></div>
         </main>
@@ -43,9 +46,9 @@ const MainLayout = ({userInfo , AuthUser}) => {
 }
 
 const carStyle = {
-    position : 'fixed',
+    position : 'relative',
     maxWidth:'45vw',
-    bottom : '10vh',
+    bottom : '5vh',
     left : '5vw',
 }
 
