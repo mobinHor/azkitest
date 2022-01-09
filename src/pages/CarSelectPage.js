@@ -1,4 +1,4 @@
-import React, { useState , useEffect , useMemo } from 'react'
+import React, { useState , useEffect } from 'react'
 import CustomBtn from '../components/utils/CustomBtn'
 import { useNavigate } from 'react-router-dom'
 import chevron from '../assets/icons/arrow.svg'

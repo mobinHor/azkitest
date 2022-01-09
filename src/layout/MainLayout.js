@@ -31,13 +31,13 @@ const MainLayout = ({userInfo , AuthUser}) => {
     return (
         <main id="MainLayout">
             <Navbar userInfo={userInfo}/>
-            <div className='row'>
+            <div style={{minHeight:'70vh'}} className='row align-items-start'>
                 <div className='col-lg-6'>
                     <Outlet />
                 </div>
-            </div>
-            <div className='w-100 mt-4 mt-lg-0'>
-                <img style={carStyle} className='img-fluid' src={carSvg} alt=""/>
+                <div className='col-lg-6 align-self-end d-flex justify-content-end px-5'>
+                    <img style={carStyle} className='img-fluid' src={carSvg} alt=""/>              
+                </div>
             </div>
             <div style={yellowBox} className='bg-yellow d-none d-md-block'></div>
             <div style={MobileYellowBox} className='bg-yellow d-block d-md-none'></div>
@@ -47,13 +47,11 @@ const MainLayout = ({userInfo , AuthUser}) => {
 
 const carStyle = {
     position : 'relative',
-    maxWidth:'45vw',
-    bottom : '5vh',
-    left : '5vw',
+    maxWidth:'50vw',
 }
 
 const yellowBox = {
-    position : 'absolute',
+    position : 'fixed',
     bottom : '0',
     zIndex : -1,
     left : 0,
@@ -62,7 +60,7 @@ const yellowBox = {
     maxWidth : '30%',
 }
 const MobileYellowBox = {
-    position : 'absolute',
+    position : 'fixed',
     bottom : '0',
     zIndex : -1,
     left : 0,
