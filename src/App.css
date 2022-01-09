@@ -31,6 +31,10 @@ body {
   font-family: 'IRANYekanRegularFaNum' , Arial, Helvetica, sans-serif;
 }
 
+.font-size-0 {
+  font-size: 0.8rem;
+}
+
 .text-green {
   color: var(--green);
 }
@@ -76,6 +80,7 @@ body {
 .CustomInputWrapper label {
   font-size: 0.7rem;
   position: absolute;
+  z-index: 9;
   top: -0.5rem;
   right: 0.5rem;
   background-color: var(--light);
@@ -116,6 +121,10 @@ body {
 
 .CustomInputWrapper .CustomInput::placeholder {
   font-size: 0.8rem;
+}
+
+.CustomInputWrapper .IputHasError {
+  border: 1px solid red !important;
 }
 
 .DropDownWrapper {

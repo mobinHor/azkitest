@@ -26,38 +26,25 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
         kind : '',
         model : '',
     })
+    
+    useEffect(() => {
+        if(storedCarForm){
+            setCarForm(storedCarForm)
+        }
+    }, [storedCarForm])
+
     const OnChange = (name , value)=>{
         setCarForm({
             ...carForm,
             [name] : value,
+            [name==="kind" ? "model" : undefined] : ''
         })
     }
 
-    // generate the list of car types according to data fetched from end-point
-    const genCarTypes = ()=>{
-        try {
-            // mapping through elements and slice out their id and title to create the list
-            return carTypes.map(c=>{
-                return {
-                    id : c.id,
-                    title : c.title
-                }
-            })
-        } catch (error) {
-            return []
-        }
-    }
-    // using useMemo to prevent re-rendering caused by state changes in the scope
-    // useMemo is sensitive to carTypes (data comming from end-point)
-    // eslint-disable-next-line
-    const carTypesList = useMemo(() => genCarTypes(), [carTypes]);
 
-    // generate the list of car types according to data fetched from end-point
+    // generate the list of car models according to chosen car kind
     const getCarModels = ()=>{
         try {
-            // reset the value of model
-            OnChange('model' , '')
-            // mapping through elements and slice out their id and title to create the list
             if(carForm.kind.id){
                 return carTypes.find(c=>c.id===carForm.kind.id).brands
             }else{
@@ -67,10 +54,6 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
             return []
         }
     }
-    // using useMemo to prevent re-rendering caused by state changes in the scope
-    // useMemo is sensitive to carForm.kind (data comming from our state)
-    // eslint-disable-next-line
-    const carModelsList = useMemo(() => getCarModels(), [carForm.kind]);
 
     const HandleSubmitForm = (e)=>{
         e.preventDefault()
@@ -86,8 +69,8 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
                 <p className='text-center text-md-right  text-grey mt-5'>نوع و مدل خودروی خود را انتخاب کنید.</p>
                 <form onSubmit={HandleSubmitForm} className='mt-5  d-flex align-items-end flex-column gap-1'>
                     <div className='d-flex flex-column flex-md-row w-100 gap-1'>
-                        <DropDown name="kind" OnChange={OnChange} list={carTypesList} listMapProp="title" value={carForm.kind} title="نوع خودرو"/>
-                        <DropDown name="model" OnChange={OnChange} list={carModelsList} listMapProp="title" value={carForm.model} title="مدل خودرو"/>
+                        <DropDown name="kind" OnChange={OnChange} list={carTypes} listMapProp="title" value={carForm.kind} title="نوع خودرو"/>
+                        <DropDown name="model" OnChange={OnChange} list={getCarModels()} listMapProp="title" value={carForm.model} title="مدل خودرو"/>
                     </div>
                     <div className='d-flex justify-content-between align-items-center w-100 gap-1'>
                         <CustomBtn 

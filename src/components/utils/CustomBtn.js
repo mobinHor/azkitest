@@ -1,7 +1,7 @@
 import React from 'react'
 import Spinner from './Spinner'
 
-const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load}) => {
+const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load , disableText}) => {
 
     const handleClick = ()=>{
         if(!disabled){
@@ -11,6 +11,7 @@ const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load}) => {
 
     return (
         <button 
+            title={disabled ? disableText : ''}
             style={{maxWidth:maxWidth}} 
             className={classes + ' btn w-100'}
             onClick={handleClick} 

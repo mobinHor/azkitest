@@ -25,16 +25,16 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm}) => {
             }
         })()
     }, [])
-    // useEffect(() => {
-    //     if(storedCompForm && comp===''){
-    //         setComp(storedCompForm)
-    //     }
-    // }, [storedCompForm])
-
+    
     const [discountForm , setDiscountForm] = useState({
         third : '',
         driver : '',
     })
+    useEffect(() => {
+        if(storedDiscountForm){
+            setDiscountForm(storedDiscountForm)
+        }
+    }, [storedDiscountForm])
 
     const OnChange = (name , value)=>{
         setDiscountForm({
