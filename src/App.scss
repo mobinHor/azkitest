@@ -153,7 +153,6 @@ body{
         width: 100%;
         border: 1px solid var(--grey);
         max-height: 200px;
-        overflow-y: scroll;
         visibility: hidden;
         opacity: 0;
         transition: opacity ease 0.3s;
@@ -164,12 +163,20 @@ body{
             font-size: 0.8rem;
             color: var(--dark-grey);
             padding: 0.5rem;
+            padding-right: 1rem;
             border-bottom: 1px dotted var(--grey);
             &:last-child{
                 border-bottom: none;
             }
             &:hover{
                 background-color: var(--yellow);
+            }
+            input{
+                border: none;
+                outline: none;
+                &::placeholder{
+                    font-weight: bold;
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import CarSelectPage from './pages/CarSelectPage';
 import PreviousInsurancePage from './pages/PreviousInsurancePage';
 import DiscountPage from './pages/DiscountPage';
+import 'simplebar/dist/simplebar.min.css';
 
 const App = () => {
   return (

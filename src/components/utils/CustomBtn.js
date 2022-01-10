@@ -18,6 +18,7 @@ const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load , disa
 
     return (
         <button 
+            data-bs-toggle="tooltip" data-bs-placement="top" 
             title={disabled ? disableText : ''}
             style={{maxWidth:maxWidth , opacity : disabled ? '0.6' : 1}} 
             className={classes + ' btn w-100'}

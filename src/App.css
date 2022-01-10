@@ -181,7 +181,6 @@ body {
   width: 100%;
   border: 1px solid var(--grey);
   max-height: 200px;
-  overflow-y: scroll;
   visibility: hidden;
   opacity: 0;
   -webkit-transition: opacity ease 0.3s;
@@ -195,6 +194,7 @@ body {
   font-size: 0.8rem;
   color: var(--dark-grey);
   padding: 0.5rem;
+  padding-right: 1rem;
   border-bottom: 1px dotted var(--grey);
 }
 
@@ -204,6 +204,27 @@ body {
 
 .DropDownWrapper ul li:hover {
   background-color: var(--yellow);
+}
+
+.DropDownWrapper ul li input {
+  border: none;
+  outline: none;
+}
+
+.DropDownWrapper ul li input::-webkit-input-placeholder {
+  font-weight: bold;
+}
+
+.DropDownWrapper ul li input:-ms-input-placeholder {
+  font-weight: bold;
+}
+
+.DropDownWrapper ul li input::-ms-input-placeholder {
+  font-weight: bold;
+}
+
+.DropDownWrapper ul li input::placeholder {
+  font-weight: bold;
 }
 
 .DropDownWrapper .showList {

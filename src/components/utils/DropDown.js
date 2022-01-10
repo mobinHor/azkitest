@@ -1,5 +1,6 @@
 import React,{useState , useRef} from 'react'
 import OutsideClick from '../../handlers/OutsideClick'
+import SimpleBar from 'simplebar-react';
 
 const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => {
     // title : displayed label on the top right corner of select
@@ -8,6 +9,9 @@ const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => 
     // listMapProp : we got a list of objects on dropdown , this will hanlde wich key of that object should be displayed as LI
 
     const [open , setOpen] = useState(false)
+
+    // state to handle filter on list
+    const [search , setSearch] = useState('')
     
     const DropRef = useRef(null)
     // handling click out side of select component , dropdown would be closed
@@ -20,6 +24,10 @@ const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => 
         setOpen(false)
     }
 
+    const FilterTheList = ()=>{
+        return list.filter(l=>l[listMapProp].includes(search))
+    }
+
     return (
         <div ref={DropRef} onClick={()=>setOpen(true)} className="DropDownWrapper w-100">
             <label className={value!=='' ? "activeDropLabel" : ""}>{title}</label>
@@ -30,9 +38,12 @@ const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => 
                 </svg>
             </div>
             <ul className={open ? "showList" : ""}>
-                {list.map(l=>(
-                    <li onClick={(e)=>HandleSelect(e , l)} key={l.id}>{l[listMapProp]}</li>
-                ))}
+            <SimpleBar style={{ maxHeight: 200 , width:'100%'}}>
+                    <li><input placeholder='جستجو' name="search" value={search} onChange={(e)=>setSearch(e.target.value)}/></li>
+                    {FilterTheList().map(l=>(
+                        <li onClick={(e)=>HandleSelect(e , l)} key={l.id}>{l[listMapProp]}</li>
+                    ))}
+            </SimpleBar>
             </ul>
         </div>
     )

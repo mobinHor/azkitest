@@ -50,7 +50,7 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
             return
         }
         if(!ValidatePasswordStrength(RegisterForm.password)){
-            setError({spot : 'password' , text :'طول رمز عبور شما باید بین 4 تا 10 کاراکتر باشد و از حداقل یک حرف بزرگ ، یک حرف کوچک و یک عدد استفاده شود'})
+            setError({spot : 'password' , text :'طول رمز عبور شما باید بین 4 تا 10 کاراکتر باشد و از حداقل یک حرف لاتین بزرگ ، یک حرف لاتین کوچک و یک عدد استفاده شود'})
             return
         }
         setLoad(true)
