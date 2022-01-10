@@ -40,6 +40,7 @@ const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => 
             <ul className={open ? "showList" : ""}>
             <SimpleBar style={{ maxHeight: 200 , width:'100%'}}>
                     <li><input placeholder='جستجو' name="search" value={search} onChange={(e)=>setSearch(e.target.value)}/></li>
+                    
                     {FilterTheList().map(l=>(
                         <li onClick={(e)=>HandleSelect(e , l)} key={l.id}>{l[listMapProp]}</li>
                     ))}
