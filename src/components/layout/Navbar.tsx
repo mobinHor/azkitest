@@ -1,11 +1,16 @@
 import React from 'react'
+// @ts-ignore
 import logo from '../../assets/icons/logo.svg'
+// @ts-ignore
 import userIcon from '../../assets/icons/user.svg'
 import { TranslateUserName } from '../../handlers/Translators'
 
-const Navbar = ({userInfo}) => {
-// this component is user in layout as navbar of pages
+type NavbarProps = {
+    userInfo : {name : string , lname : string} | undefined
+}
 
+const Navbar = ({userInfo} : NavbarProps) => {
+// this component is user in layout as navbar of pages
     return (
         <nav id="Navbar">
             <ul className='d-flex align-items-center justify-content-between p-5'>

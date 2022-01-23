@@ -1,13 +1,19 @@
 import React,{useState , useEffect} from 'react'
 import Navbar from '../components/layout/Navbar'
 import { Outlet } from 'react-router-dom'
+// @ts-ignore
 import carSvg from '../assets/icons/car-green.svg'
 import {connect} from 'react-redux'
 import { AuthUser } from '../Redux/actions/GlobalActions'
 import Spinner from '../components/utils/Spinner'
 import { useNavigate } from 'react-router-dom'
 
-const MainLayout = ({userInfo , AuthUser}) => {
+type MainLayoutProps = {
+    userInfo : {name : string , lname : string} | undefined,
+    AuthUser : () => boolean 
+}
+
+const MainLayout = ({userInfo , AuthUser} : MainLayoutProps) => {
 
     const Navigate = useNavigate()
 
@@ -47,14 +53,14 @@ const MainLayout = ({userInfo , AuthUser}) => {
     )
 }
 
-const carStyle = {
+const carStyle : React.CSSProperties = {
     position : 'relative',
     left : '5vw',
     top : '0',
     maxWidth:'45vw',
 }
 
-const yellowBox = {
+const yellowBox : React.CSSProperties = {
     position : 'fixed',
     bottom : '0',
     zIndex : -1,
@@ -63,7 +69,7 @@ const yellowBox = {
     width : '100vw',
     maxWidth : '30%',
 }
-const MobileYellowBox = {
+const MobileYellowBox : React.CSSProperties = {
     position : 'relative',
     zIndex : -1,
     left : 0,
@@ -71,7 +77,8 @@ const MobileYellowBox = {
     width : '100vw',
 }
 
-const mapStateToProps = state=>({
+
+const mapStateToProps = (state : any) =>({
     userInfo : state.Global.userInfo
 })
 
