@@ -2,7 +2,16 @@ import React,{useState , useRef} from 'react'
 import OutsideClick from '../../handlers/OutsideClick'
 import SimpleBar from 'simplebar-react';
 
-const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => {
+type DropDownProps = {
+    title : string,
+    list : any[],
+    value : any,
+    name : string,
+    OnChange : Function,
+    listMapProp : string
+}
+
+const DropDown = ({title , list=[] , value , name , OnChange , listMapProp} : DropDownProps) => {
     // title : displayed label on the top right corner of select
     // list : incomiing list of options to show on drop down
     // name : the name of select to target the desired key of state on parent element
@@ -13,12 +22,12 @@ const DropDown = ({title , list=[] , value , name , OnChange , listMapProp}) => 
     // state to handle filter on list
     const [search , setSearch] = useState('')
     
-    const DropRef = useRef(null)
+    const DropRef = useRef<HTMLDivElement>(null)
     // handling click out side of select component , dropdown would be closed
     OutsideClick(DropRef , ()=>setOpen(false))
 
     // selecting the element on dropdown , changing the state of parent with OnChange , closing the dropdown 
-    const HandleSelect = (e , selected)=>{
+    const HandleSelect = (e : React.SyntheticEvent , selected : any)=>{
         e.stopPropagation()
         OnChange(name , selected)
         setOpen(false)

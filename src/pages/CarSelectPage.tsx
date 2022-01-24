@@ -1,18 +1,23 @@
 import React, { useState , useEffect } from 'react'
 import CustomBtn from '../components/utils/CustomBtn'
 import { useNavigate } from 'react-router-dom'
+// @ts-ignore
 import chevron from '../assets/icons/arrow.svg'
+// @ts-ignore
 import DropDown from '../components/utils/DropDown'
 import { GetCarTypes } from '../Redux/actions/GlobalActions'
-import {connect} from 'react-redux'
+import {connect , ConnectedProps} from 'react-redux'
 import { StoreCarForm } from '../Redux/actions/GlobalActions'
+import { RootState } from '../Redux/Store'
 
-const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
+
+
+const CarSelectPage = ({StoreCarForm , storedCarForm} : propsFromRedux) => {
 
     const Navigate = useNavigate()
 
     // state to store carTypes comming from ENDPOINT locally
-    const [carTypes , setCarTypes] = useState([])
+    const [carTypes , setCarTypes] = useState<any[]>([])
 
     // getting and setting data to local state
     useEffect(() => {
@@ -25,7 +30,11 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
     }, [])
 
     // state to handle chosen KIND and MODEL of vehicle
-    const [carForm , setCarForm] = useState({
+    type carFormType = {
+        kind : any,
+        model : object | ''
+    }
+    const [carForm , setCarForm] = useState<carFormType>({
         kind : '',
         model : '',
     })
@@ -36,12 +45,13 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
             setCarForm(storedCarForm)
         }
     }, [storedCarForm])
-    const OnChange = (name , value)=>{
+
+    const OnChange = (name : any , value : string)=>{
         setCarForm({
             ...carForm,
             [name] : value,
             // when user is selecting kind , the carModels list would be revoked, so the selected MODEL should not be valid and must be cleared
-            [name==="kind" ? "model" : undefined] : ''
+            [name==="kind" ? "model" : ''] : ''
         })
     }
 
@@ -60,7 +70,7 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
     }
 
     // store carForm data to REDUX and proceed to next page
-    const HandleSubmitForm = (e)=>{
+    const HandleSubmitForm = (e : React.SyntheticEvent)=>{
         e.preventDefault()
         StoreCarForm(carForm)
         Navigate('/previous_insurance')
@@ -109,8 +119,9 @@ const CarSelectPage = ({StoreCarForm , storedCarForm}) => {
     )
 }
 
-const mapStateToProps = state=>({
-    storedCarForm : state.Global.carForm
-})
+const mapState = (state : RootState)=>({storedCarForm : state.Global.carForm})
+const mapDispatch = {StoreCarForm : StoreCarForm}
+type propsFromRedux = ConnectedProps<typeof connector>
+const connector = connect(mapState , mapDispatch)
 
-export default connect(mapStateToProps , {StoreCarForm})(CarSelectPage)
+export default connector(CarSelectPage)

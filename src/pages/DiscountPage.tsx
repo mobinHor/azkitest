@@ -3,19 +3,21 @@ import CustomBtn from '../components/utils/CustomBtn'
 import { useNavigate } from 'react-router-dom'
 import DropDown from '../components/utils/DropDown'
 import { GetDriverDiscounts , GetThirdDiscounts } from '../Redux/actions/GlobalActions'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import { StoreDiscountForm } from '../Redux/actions/GlobalActions'
 import CustomModal from '../components/utils/CustomModal'
 import {TranslateUserName} from '../handlers/Translators'
+import { RootState } from '../Redux/Store'
 
-const ModalTableElement = ({title , value})=>(
+type ModalTableElementProps = {title : string , value : string | number}
+const ModalTableElement = ({title , value} : ModalTableElementProps)=>(
     <div className='d-flex align-items-center justify-content-between'>
         <p className='my-auto font-weight-bold text-grey'>{title}</p>
         <p className='my-auto'>{value}</p>
     </div>
 )
 
-const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo , storedCompForm , storedCarForm}) => {
+const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo , storedCompForm , storedCarForm} : ComponentReduxTypes) => {
 
     const Navigate = useNavigate()
 
@@ -55,7 +57,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
         }
     }, [storedDiscountForm])
 
-    const OnChange = (name , value)=>{
+    const OnChange = (name : string , value : string)=>{
         setDiscountForm({
             ...discountForm,
             [name] : value
@@ -63,7 +65,7 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
     }
 
     // store carForm data to REDUX and open the final modal
-    const HandleSubmitForm = (e)=>{
+    const HandleSubmitForm = (e : React.SyntheticEvent)=>{
         e.preventDefault()
         StoreDiscountForm(discountForm)
         setOpenModal(true)
@@ -112,11 +114,14 @@ const DiscountPage = ({StoreDiscountForm , storedDiscountForm , storedUserInfo ,
     )
 }
 
-const mapStateToProps = state=>({
+const mapState = (state : RootState)=>({
     storedDiscountForm : state.Global.discountForm,
     storedCarForm : state.Global.carForm,
     storedCompForm : state.Global.compForm,
     storedUserInfo : state.Global.userInfo
 })
+const mapDispatch = { StoreDiscountForm : StoreDiscountForm}
+const connector = connect(mapState , mapDispatch)
+type ComponentReduxTypes = ConnectedProps<typeof connector>
 
-export default connect(mapStateToProps , {StoreDiscountForm})(DiscountPage)
+export default connector(DiscountPage)

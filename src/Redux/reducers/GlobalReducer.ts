@@ -1,4 +1,5 @@
 import * as t from '../Types'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 // initial state of this reducer
 const GlobalState = {
@@ -8,7 +9,7 @@ const GlobalState = {
     discountForm : undefined
 }
 
-const GlobalReducer = (state=GlobalState , action)=>{
+const GlobalReducer = (state=GlobalState , action : PayloadAction<any>)=>{
     switch (action.type) {
         case t.STORE_USER_INFO: return{
             ...state,

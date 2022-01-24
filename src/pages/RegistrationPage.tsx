@@ -1,12 +1,24 @@
+import { RootState } from '../Redux/Store';
 import React, { useState , useEffect } from 'react'
 import CustomInput from '../components/utils/CustomInput'
 import CustomBtn from '../components/utils/CustomBtn'
-import {connect} from 'react-redux'
+import {connect , ConnectedProps} from 'react-redux'
 import { StoreUserInfo } from '../Redux/actions/GlobalActions'
 import { useNavigate } from 'react-router-dom'
 import { ValidateMobile , ValidatePasswordStrength , ValidatePersianOnly , ValidateNumberOnly } from '../handlers/FormValidations'
 
-const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
+
+
+const mapStateToProps = (state : RootState)=>({
+    StoredUserInfo : state.Global.userInfo
+})
+const mapDispatch = {
+    StoreUserInfo : StoreUserInfo
+}
+const connector = connect(mapStateToProps, mapDispatch)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const RegistrationPage = ({StoreUserInfo , StoredUserInfo} : PropsFromRedux ) => {
 
     const Navigate = useNavigate()
 
@@ -17,7 +29,8 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
     // recieves SPOT and TEXT
     // SPOT : defines where the error has occured
     // TEXT : A message to clarify the error
-    const [error , setError] = useState(null)
+    type errorType = null | {spot : string , text : string}
+    const [error , setError] = useState<errorType>(null)
 
     // when the component is re-rendered and userInfo persists in REDUX , set the data back into private state of this component
     useEffect(() => {
@@ -34,7 +47,7 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
         password : '',
     })
 
-    const OnChange = (name , value)=>{
+    const OnChange = (name : string , value : string)=>{
         // set the error object to null when user changes any input after occuring the error
         setError(null)
         setRegisterForm({
@@ -43,7 +56,7 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
         })
     }
 
-    const HandleSubmitForm = (e)=>{
+    const HandleSubmitForm = (e : React.SyntheticEvent)=>{
         e.preventDefault()
         if(!ValidateMobile(RegisterForm.mobile)){
             setError({spot : 'mobile' , text :'شماره موبایل وارد شده معتبر نیست'})
@@ -122,8 +135,5 @@ const RegistrationPage = ({StoreUserInfo , StoredUserInfo}) => {
     )
 }
 
-const mapStateToProps = state=>({
-    StoredUserInfo : state.Global.userInfo
-})
 
-export default connect(mapStateToProps , {StoreUserInfo})(RegistrationPage)
+export default connector(RegistrationPage)

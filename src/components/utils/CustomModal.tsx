@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useRef } from 'react'
 import OutsideClick from '../../handlers/OutsideClick'
 
-const CustomModal = ({open , setOpen , children , maxWidth}) => {
+
+type CustomModalTypes = {
+    open : boolean,
+    setOpen : React.Dispatch<React.SetStateAction<boolean>>,
+    children : ReactNode,
+    maxWidth : number
+}
+
+const CustomModal = ({open , setOpen , children , maxWidth} : CustomModalTypes) => {
     // open , setOpen => to handle showing and hiding the modal
 
     const handleClose = ()=>{

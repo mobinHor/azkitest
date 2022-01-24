@@ -3,17 +3,14 @@ import Navbar from '../components/layout/Navbar'
 import { Outlet } from 'react-router-dom'
 // @ts-ignore
 import carSvg from '../assets/icons/car-green.svg'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import { AuthUser } from '../Redux/actions/GlobalActions'
 import Spinner from '../components/utils/Spinner'
 import { useNavigate } from 'react-router-dom'
+import { RootState } from '../Redux/Store'
 
-type MainLayoutProps = {
-    userInfo : {name : string , lname : string} | undefined,
-    AuthUser : () => boolean 
-}
 
-const MainLayout = ({userInfo , AuthUser} : MainLayoutProps) => {
+const MainLayout = ({userInfo , AuthUser} : ComponentReduxType) => {
 
     const Navigate = useNavigate()
 
@@ -78,8 +75,11 @@ const MobileYellowBox : React.CSSProperties = {
 }
 
 
-const mapStateToProps = (state : any) =>({
+const mapStateToProps = (state : RootState) =>({
     userInfo : state.Global.userInfo
 })
+const mapDispatch = { AuthUser : AuthUser }
+const connector = connect(mapStateToProps , mapDispatch)
+type ComponentReduxType = ConnectedProps<typeof connector>
 
-export default connect(mapStateToProps , {AuthUser})(MainLayout)
+export default connector(MainLayout)

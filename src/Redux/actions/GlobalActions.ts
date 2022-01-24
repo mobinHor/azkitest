@@ -1,8 +1,11 @@
+import { RootState } from './../Store';
 import * as t from '../Types'
 import axios from 'axios'
+import { ThunkAction } from 'redux-thunk'
+import { AnyAction } from 'redux';
 
 // fake authorizing user
-export const AuthUser = ()=> (dispatch , getState) =>{
+export const AuthUser = () : ThunkAction<boolean , RootState , unknown , AnyAction> => (dispatch , getState) =>{
     if(getState().Global.userInfo){
         return true
     }else{
@@ -11,7 +14,7 @@ export const AuthUser = ()=> (dispatch , getState) =>{
 }
 
 // storing userInfo comming from RegistrationPage to REDUX
-export const StoreUserInfo = (form)=> (dispatch) =>{
+export const StoreUserInfo = (form : any) : ThunkAction<void , RootState , unknown , AnyAction> => (dispatch) =>{
     dispatch({
         type : t.STORE_USER_INFO,
         payload : form
@@ -19,7 +22,7 @@ export const StoreUserInfo = (form)=> (dispatch) =>{
 }
 
 // storing carForm comming from CarSelectPage to REDUX
-export const StoreCarForm = (form)=> (dispatch) =>{
+export const StoreCarForm = (form : any) : ThunkAction<void , RootState , unknown , AnyAction> => (dispatch) =>{
     dispatch({
         type : t.STORE_CAR_FORM,
         payload : form
@@ -27,7 +30,7 @@ export const StoreCarForm = (form)=> (dispatch) =>{
 }
 
 // storing ComForm comming from PreviousInsurancePage to REDUX
-export const StoreCompForm = (form)=> (dispatch) =>{
+export const StoreCompForm = (form : any) : ThunkAction<void , RootState , unknown , AnyAction> => (dispatch) =>{
     dispatch({
         type : t.STORE_COMP_FORM,
         payload : form
@@ -35,7 +38,7 @@ export const StoreCompForm = (form)=> (dispatch) =>{
 }
 
 // storing DiscountForm comming from DiscountPage to REDUX
-export const StoreDiscountForm = (form)=> (dispatch) =>{
+export const StoreDiscountForm = (form : any) : ThunkAction<void , RootState , unknown , AnyAction> => (dispatch) =>{
     dispatch({
         type : t.STORE_DISCOUNT_FORM,
         payload : form

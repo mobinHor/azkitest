@@ -1,13 +1,16 @@
 import React, { useState , useEffect } from 'react'
 import CustomBtn from '../components/utils/CustomBtn'
 import { useNavigate } from 'react-router-dom'
+// @ts-ignore
 import chevron from '../assets/icons/arrow.svg'
+// @ts-ignore
 import DropDown from '../components/utils/DropDown'
 import { GetInsuranceCompanies } from '../Redux/actions/GlobalActions'
-import {connect} from 'react-redux'
+import {connect, ConnectedProps} from 'react-redux'
 import { StoreCompForm } from '../Redux/actions/GlobalActions'
+import { RootState } from '../Redux/Store'
 
-const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
+const PreviousInsurancePage = ({StoreCompForm , storedCompForm} : ComponentReduxProps) => {
 
     const Navigate = useNavigate()
 
@@ -36,12 +39,12 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
 
 
 
-    const OnChange = (name , value)=>{
+    const OnChange = (name : string , value : string)=>{
         setComp(value)
     }
 
     // store carForm data to REDUX and proceed to next page
-    const HandleSubmitForm = (e)=>{
+    const HandleSubmitForm = (e : React.SyntheticEvent)=>{
         e.preventDefault()
         StoreCompForm(comp)
         Navigate('/discount')
@@ -89,8 +92,9 @@ const PreviousInsurancePage = ({StoreCompForm , storedCompForm}) => {
     )
 }
 
-const mapStateToProps = state=>({
-    storedCompForm : state.Global.compForm
-})
+const mapState = (state: RootState)=>({ storedCompForm : state.Global.compForm })
+const mapDispatch = { StoreCompForm : StoreCompForm }
+const connector = connect(mapState , mapDispatch)
+type ComponentReduxProps =  ConnectedProps<typeof connector>
 
-export default connect(mapStateToProps , {StoreCompForm})(PreviousInsurancePage)
+export default connector(PreviousInsurancePage)

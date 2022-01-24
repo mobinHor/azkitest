@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Spinner from './Spinner'
 
-const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load , disableText}) => {
+
+type CustomBtnProps = {
+    OnClick : Function,
+    text : string | ReactElement,
+    classes? : string,
+    disabled? : boolean,
+    maxWidth? : number,
+    load? : boolean,
+    disableText? : string
+}
+
+const CustomBtn = ({classes , OnClick , disabled , text , maxWidth , load , disableText} : CustomBtnProps) => {
     // classes : identical to className , everything inside classes will go straight to className of button
     // OnClick : to handle click event of the button
     // disabled : true when button is disabled
